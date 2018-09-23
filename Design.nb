@@ -1,0 +1,176 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='WolframDesktop 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       161,          7]
+NotebookDataLength[      6181,        168]
+NotebookOptionsPosition[      4713,        134]
+NotebookOutlinePosition[      5046,        149]
+CellTagsIndexPosition[      5003,        146]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Advanced Cloud Logging", "Title",
+ CellChangeTimes->{{3.74663494125525*^9, 
+  3.7466349450467052`*^9}},ExpressionUUID->"3b54d342-d27b-4503-86ca-\
+1ae8733b658e"],
+
+Cell["\<\
+In the Wolfram Cloud, the only types of objects that write to a log file are \
+ScheduledTasks. However, even these logs are poorly formatted and difficult \
+to read. This package attempts to create a set of functions that can be \
+utilized in order to provide a better logging system that:
+1. Can be wrapped around any expression evaluated in the cloud
+2. Is written in a format that is both easy to read and easy to compute with\
+\>", "Text",
+ CellChangeTimes->{{3.746634979570951*^9, 3.7466350214492826`*^9}, {
+  3.746635114661371*^9, 3.746635166097543*^9}, {3.7466351973368797`*^9, 
+  3.7466352598032503`*^9}},ExpressionUUID->"3495e247-4703-491d-801d-\
+d3aa394d92f8"],
+
+Cell[CellGroupData[{
+
+Cell["Logging", "Chapter",
+ CellChangeTimes->{{3.746635577819528*^9, 3.746635584870875*^9}, {
+  3.746715564194523*^9, 
+  3.746715565134808*^9}},ExpressionUUID->"cda70f5d-d1b7-422f-8db7-\
+39cd1db011a9"],
+
+Cell["\<\
+To use the Advanced Cloud Logging system for writing to a log file, all you \
+need to do is use the CloudLoggingWrapper function. CloudLoggingWrapper has \
+two forms, shown below:\
+\>", "Text",
+ CellChangeTimes->{{3.74671554409585*^9, 
+  3.746715591982864*^9}},ExpressionUUID->"dd6a76ad-c1df-4d7e-a70f-\
+7963e7669cb0"],
+
+Cell[BoxData[
+ RowBox[{"CloudLoggingWrapper", "[", 
+  RowBox[{"expr", ",", " ", "log"}], "]"}]], "Code",
+ CellChangeTimes->{{3.746715596133613*^9, 
+  3.7467156303362713`*^9}},ExpressionUUID->"9062f657-5bad-41b2-9e78-\
+ef8674b32200"],
+
+Cell[BoxData[
+ RowBox[{"CloudLoggingWrapper", "[", "expr", "]"}]], "Code",
+ CellChangeTimes->{
+  3.746715633532919*^9},ExpressionUUID->"a1cc9a70-d1fe-4f12-b87f-\
+be662c29decd"],
+
+Cell[TextData[{
+ "As you can see, the first takes both the expression to be evaluated (",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ ") and the location to log to (",
+ StyleBox["log",
+  FontSlant->"Italic"],
+ "). This allows you to choose where you would like to save your log as well \
+as use the same log for multiple evaluations. The second form only takes the \
+expression. In this case, an unnamed object will be created to be used for \
+the log file. This use is fine if you only need to log the odd evaluation and \
+are willing to do a little digging to find where the file is."
+}], "Text",
+ CellChangeTimes->{{3.74671561281076*^9, 
+  3.74671576771885*^9}},ExpressionUUID->"714f5dbf-5058-4a67-9a2f-\
+85fa304ff249"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Importing the Log", "Chapter",
+ CellChangeTimes->{{3.7467158028066807`*^9, 
+  3.746715819850116*^9}},ExpressionUUID->"60a36609-83f3-4ba7-8d12-\
+cdc8ce4bed67"],
+
+Cell["\<\
+One of the nice features of the Advanced Cloud Logging system is that the log \
+files are both easy to read and easy to import. To import a log written using \
+the CloudLoggingWrapper, simply use the ImportCloudLog function.\
+\>", "Text",
+ CellChangeTimes->{{3.746715889457714*^9, 
+  3.746715938324812*^9}},ExpressionUUID->"c9498ab9-8f9e-4083-a098-\
+3e7744bb6d0c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Additional Tools", "Chapter",
+ CellChangeTimes->{{3.746718125315691*^9, 
+  3.746718127496717*^9}},ExpressionUUID->"bbe7a029-f981-4d11-9816-\
+7699c8182782"],
+
+Cell[CellGroupData[{
+
+Cell["MessageHistogram", "Subchapter",
+ CellChangeTimes->{{3.7467181411141567`*^9, 
+  3.7467181524356413`*^9}},ExpressionUUID->"8065b362-0285-4a18-b781-\
+93abdf8c768b"],
+
+Cell["\<\
+MessageHistogram shows a DateHistogram of the messages in the log file, \
+grouped by their channel (or category). Remember, \[OpenCurlyDoubleQuote]Info\
+\[CloseCurlyDoubleQuote] messages are from the system, \
+\[OpenCurlyDoubleQuote]Output\[CloseCurlyDoubleQuote] are from Print \
+statements, and \[OpenCurlyDoubleQuote]Messages\[CloseCurlyDoubleQuote] and \
+\[OpenCurlyDoubleQuote]Urgent\[CloseCurlyDoubleQuote] are errors.\
+\>", "Text",
+ CellChangeTimes->{{3.746718147267434*^9, 
+  3.746718251755536*^9}},ExpressionUUID->"8ccc0e0e-650b-45b6-b749-\
+a4ae3253e260"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{958, 1027},
+WindowMargins->{{Automatic, 1}, {1, Automatic}},
+FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 7, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[583, 22, 166, 3, 98, "Title",ExpressionUUID->"3b54d342-d27b-4503-86ca-1ae8733b658e"],
+Cell[752, 27, 680, 11, 127, "Text",ExpressionUUID->"3495e247-4703-491d-801d-d3aa394d92f8"],
+Cell[CellGroupData[{
+Cell[1457, 42, 201, 4, 69, "Chapter",ExpressionUUID->"cda70f5d-d1b7-422f-8db7-39cd1db011a9"],
+Cell[1661, 48, 328, 7, 58, "Text",ExpressionUUID->"dd6a76ad-c1df-4d7e-a70f-7963e7669cb0"],
+Cell[1992, 57, 232, 5, 53, "Code",ExpressionUUID->"9062f657-5bad-41b2-9e78-ef8674b32200"],
+Cell[2227, 64, 176, 4, 53, "Code",ExpressionUUID->"a1cc9a70-d1fe-4f12-b87f-be662c29decd"],
+Cell[2406, 70, 721, 15, 104, "Text",ExpressionUUID->"714f5dbf-5058-4a67-9a2f-85fa304ff249"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3164, 90, 164, 3, 69, "Chapter",ExpressionUUID->"60a36609-83f3-4ba7-8d12-cdc8ce4bed67"],
+Cell[3331, 95, 374, 7, 58, "Text",ExpressionUUID->"c9498ab9-8f9e-4083-a098-3e7744bb6d0c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3742, 107, 161, 3, 69, "Chapter",ExpressionUUID->"bbe7a029-f981-4d11-9816-7699c8182782"],
+Cell[CellGroupData[{
+Cell[3928, 114, 168, 3, 65, "Subchapter",ExpressionUUID->"8065b362-0285-4a18-b781-93abdf8c768b"],
+Cell[4099, 119, 574, 10, 81, "Text",ExpressionUUID->"8ccc0e0e-650b-45b6-b749-a4ae3253e260"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
